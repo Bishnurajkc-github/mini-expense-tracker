@@ -49,6 +49,8 @@ html = '''
 <html>
 <body style="font-family: Arial; padding: 20px;">
     <h2>💰 Expense Tracker</h2>
+    <h2>💰 New Branch Testing changed removed from main</h2>
+
     <form method="POST">
         <input name="item" placeholder="Item" required>
         <input name="amount" type="number" step="0.01" placeholder="Amount" required>
@@ -66,6 +68,7 @@ html = '''
 </html>
 '''
 
+
 @app.route('/', methods=['GET', 'POST'])
 def tracker():
     if request.method == 'POST':
@@ -75,6 +78,7 @@ def tracker():
 
     total = sum(e['amount'] for e in expenses)
     return render_template_string(html, expenses=expenses, total=total)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)
