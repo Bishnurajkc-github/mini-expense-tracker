@@ -50,6 +50,8 @@ html = '''
 <body style="font-family: Arial; padding: 20px;">
     <h2>💰 Expense Tracker</h2>
     <h2>💰 New Branch Testing changed removed from main</h2>
+    <h2>💰 New Branch Testing changed removed from main</h2>
+
 
     <form method="POST">
         <input name="item" placeholder="Item" required>
