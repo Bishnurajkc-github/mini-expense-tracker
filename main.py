@@ -531,6 +531,16 @@ HTML_TEMPLATE = '''
             opacity: 0.5;
         }
 
+        /* Copyright Section */
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .header h1 {
@@ -605,7 +615,7 @@ HTML_TEMPLATE = '''
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Total Expenses</h3>
-                <div class="value">₹{{ "%.2f"|format(stats.total) }}</div>
+                <div class="value">Rs. {{ "%.2f"|format(stats.total) }}</div>
                 <div class="label">Overall spending</div>
             </div>
 
@@ -617,7 +627,7 @@ HTML_TEMPLATE = '''
 
             <div class="stat-card">
                 <h3>Average per Expense</h3>
-                <div class="value">₹{{ "%.2f"|format(stats.average) }}</div>
+                <div class="value">Rs. {{ "%.2f"|format(stats.average) }}</div>
                 <div class="label">Per transaction average</div>
             </div>
         </div>
@@ -631,7 +641,7 @@ HTML_TEMPLATE = '''
                     </div>
 
                     <div class="form-group">
-                        <input type="number" step="0.01" name="amount" placeholder="Amount (₹)" required>
+                        <input type="number" step="0.01" name="amount" placeholder="Amount (Rs.)" required>
                     </div>
 
                     <div class="form-group">
@@ -700,7 +710,7 @@ HTML_TEMPLATE = '''
                         <td>{{ expense.date }}</td>
                         <td><strong>{{ expense.item }}</strong></td>
                         <td><span class="category-badge">{{ expense.category }}</span></td>
-                        <td class="amount">₹{{ "%.2f"|format(expense.amount) }}</td>
+                        <td class="amount">Rs. {{ "%.2f"|format(expense.amount) }}</td>
                         <td>{{ expense.payment_method }}</td>
                         <td>{{ expense.notes[:30] }}{% if expense.notes|length > 30 %}...{% endif %}</td>
                         <td class="actions">
@@ -721,6 +731,11 @@ HTML_TEMPLATE = '''
                 <p>Add your first expense using the form above!</p>
             </div>
             {% endif %}
+        </div>
+
+        <!-- Copyright Section -->
+        <div class="copyright">
+            <p>© 2026 Bishnu Raj KC. All rights reserved.</p>
         </div>
     </div>
 </body>
@@ -843,6 +858,16 @@ EDIT_TEMPLATE = '''
         .btn-cancel:hover {
             background: #cbd5e0;
         }
+
+        /* Copyright Section */
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
@@ -859,7 +884,7 @@ EDIT_TEMPLATE = '''
             </div>
 
             <div class="form-group">
-                <label>Amount (₹)</label>
+                <label>Amount (Rs.)</label>
                 <input type="number" step="0.01" name="amount" value="{{ expense.amount }}" required>
             </div>
 
@@ -895,6 +920,11 @@ EDIT_TEMPLATE = '''
                 <button type="submit" class="btn-save">Save Changes</button>
             </div>
         </form>
+
+        <!-- Copyright Section -->
+        <div class="copyright">
+            <p>© 2026 Bishnu Raj KC. All rights reserved.</p>
+        </div>
     </div>
 </body>
 </html>
@@ -1028,8 +1058,53 @@ SUMMARY_TEMPLATE = '''
             border-radius: 4px;
         }
 
+        .overall-stats {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        /* Copyright Section */
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
         @media (max-width: 768px) {
             .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -1055,7 +1130,7 @@ SUMMARY_TEMPLATE = '''
                             <div class="progress" style="width: {{ (amount/total*100 if total > 0 else 0)|round }}%"></div>
                         </div>
                         <div style="text-align: right;">
-                            <div class="amount">₹{{ "%.2f"|format(amount) }}</div>
+                            <div class="amount">Rs. {{ "%.2f"|format(amount) }}</div>
                             <div class="percentage">
                                 {{ "%.1f"|format(amount/total*100 if total > 0 else 0) }}%
                             </div>
@@ -1078,7 +1153,7 @@ SUMMARY_TEMPLATE = '''
                         <div class="progress-bar">
                             <div class="progress" style="width: {{ (amount/total*100 if total > 0 else 0)|round }}%"></div>
                         </div>
-                        <div class="amount">₹{{ "%.2f"|format(amount) }}</div>
+                        <div class="amount">Rs. {{ "%.2f"|format(amount) }}</div>
                     </div>
                     {% endfor %}
                 {% else %}
@@ -1089,24 +1164,29 @@ SUMMARY_TEMPLATE = '''
             </div>
         </div>
 
-        <div class="summary-card">
+        <div class="overall-stats">
             <h2><span>💰</span> Overall Statistics</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px 0;">
-                <div style="text-align: center;">
-                    <div style="font-size: 0.9rem; color: #718096;">Total Expenses</div>
-                    <div style="font-size: 2rem; font-weight: 700; color: #2d3748;">₹{{ "%.2f"|format(total) }}</div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Total Expenses</div>
+                    <div class="stat-value">Rs. {{ "%.2f"|format(total) }}</div>
                 </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 0.9rem; color: #718096;">Number of Expenses</div>
-                    <div style="font-size: 2rem; font-weight: 700; color: #2d3748;">{{ expense_count }}</div>
+                <div class="stat-item">
+                    <div class="stat-label">Number of Expenses</div>
+                    <div class="stat-value">{{ expense_count }}</div>
                 </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 0.9rem; color: #718096;">Average per Expense</div>
-                    <div style="font-size: 2rem; font-weight: 700; color: #2d3748;">
-                        ₹{{ "%.2f"|format(total/expense_count if expense_count > 0 else 0) }}
+                <div class="stat-item">
+                    <div class="stat-label">Average per Expense</div>
+                    <div class="stat-value">
+                        Rs. {{ "%.2f"|format(total/expense_count if expense_count > 0 else 0) }}
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Copyright Section -->
+        <div class="copyright">
+            <p>© 2026 Bishnu Raj KC. All rights reserved.</p>
         </div>
     </div>
 </body>
@@ -1121,5 +1201,6 @@ if __name__ == '__main__':
     print("🚀 Starting server...")
     print("🌐 Open the webview or click the URL that appears above")
     print("💾 Data is automatically saved to 'expenses.json'")
+    print("© 2026 Bishnu Raj KC. All rights reserved.")
     print("=" * 60)
     app.run(host='0.0.0.0', port=5000, debug=True)
