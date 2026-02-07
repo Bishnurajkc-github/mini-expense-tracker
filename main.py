@@ -402,7 +402,7 @@ HTML_TEMPLATE = '''
     <div class="container">
         <div class="header">
             <h1>💰 Personal Expense Tracker</h1>
-            <p>Your data is stored privately in <strong>your own browser</strong>.</p>
+            <p>Hello from Bishnu</strong>.</p>
             <div class="nav-links">
                 <button onclick="window.location.reload()" class="nav-btn">
                     <span>🔄</span> Refresh
@@ -479,7 +479,7 @@ HTML_TEMPLATE = '''
 
         <!-- Copyright -->
         <div class="copyright">
-            <p>© 2026 Bishnu Raj KC. All rights reserved. | Data stored locally in your browser.</p>
+            <p>© 2026 Bishnu Raj KC. All rights reserved.</p>
         </div>
     </div>
 
